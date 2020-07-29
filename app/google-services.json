@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "364953250213",
+    "firebase_url": "https://call-for-code-38bb4.firebaseio.com",
+    "project_id": "call-for-code-38bb4",
+    "storage_bucket": "call-for-code-38bb4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364953250213:android:335932f05d01d907a3e04c",
+        "android_client_info": {
+          "package_name": "com.example.callforcode"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364953250213-r041i2ku17k5hjtqf0ij8r5qcu4nd6kc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNsn6S7u7iARC09JWeNK2z95V8w5sKVxo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "364953250213-r041i2ku17k5hjtqf0ij8r5qcu4nd6kc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
