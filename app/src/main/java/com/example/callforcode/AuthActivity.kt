@@ -122,6 +122,16 @@ class AuthActivity : AppCompatActivity(){
         startActivity(mainIntent)
     }
 
+    private  fun successGoogleRegister(email:String, name:String, provider:ProviderType){
+        val mainIntent = Intent(this,MainActivity::class.java).apply {
+
+            putExtra("email",email)
+            putExtra("provider",provider.name)
+            putExtra("name",name)
+        }
+        startActivity(mainIntent)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == GOOGLE_SIGN_IN){
@@ -133,7 +143,7 @@ class AuthActivity : AppCompatActivity(){
                     val credential = GoogleAuthProvider.getCredential(account.idToken,null)
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
                         if(it.isSuccessful){
-                            successRegister(account.email ?: "", ProviderType.GOOGLE)
+                            successGoogleRegister(account.email ?: "",account.displayName.toString() , ProviderType.GOOGLE)
                         }else{
                             alertLogInError()
                         }

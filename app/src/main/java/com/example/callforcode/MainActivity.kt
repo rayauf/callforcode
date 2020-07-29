@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.FragmentTransaction
@@ -16,6 +17,7 @@ import com.example.callforcode.Fragments.HomeFragment
 import com.example.callforcode.Fragments.ProfileFragment
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.header.*
 import kotlinx.android.synthetic.main.main_nav_bar.*
 enum class ProviderType{
     BASIC,
@@ -37,10 +39,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val bundle: Bundle? = intent.extras
         val email:String? =  bundle?.getString("email")
         val provider:String? = bundle?.getString("provider")
+        val displayName:String? = bundle?.getString("name")
 
         val prefs: SharedPreferences.Editor? = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
         prefs?.putString("email",email)
         prefs?.putString("provider",provider)
+        prefs?.putString("name",displayName)
         prefs?.apply()
 
         setSupportActionBar(toolbar)
@@ -62,12 +66,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setCheckedItem(R.id.home_item)
         nav_view.setNavigationItemSelectedListener(this)
 
+        setHeaderData()
+
+
+
         homeFragment = HomeFragment()
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.frame_layout,homeFragment)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
+    }
+
+    private fun setHeaderData() {
+        val prefToHeader: SharedPreferences? =  getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        val headerName = prefToHeader?.getString("name", "")
+        val headerMail = prefToHeader?.getString("email","")
+
+        val headView  = nav_view.getHeaderView(0)
+        val usernameTextView= headView.findViewById<TextView>(R.id.header_username)
+        val emailTextView = headView.findViewById<TextView>(R.id.header_email)
+
+        usernameTextView.text = headerName
+        emailTextView.text = headerMail
     }
 
 
