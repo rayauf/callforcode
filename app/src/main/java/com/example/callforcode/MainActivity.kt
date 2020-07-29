@@ -1,7 +1,10 @@
 package com.example.callforcode
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -14,7 +17,10 @@ import com.example.callforcode.Fragments.ProfileFragment
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_nav_bar.*
-
+enum class ProviderType{
+    BASIC,
+    GOOGLE
+}
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
 
@@ -27,6 +33,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val bundle: Bundle? = intent.extras
+        val email:String? =  bundle?.getString("email")
+        val provider:String? = bundle?.getString("provider")
+
+        val prefs: SharedPreferences.Editor? = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+        prefs?.putString("email",email)
+        prefs?.putString("provider",provider)
+        prefs?.apply()
 
         setSupportActionBar(toolbar)
         val actionBar = supportActionBar
@@ -54,6 +69,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
     }
+
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when(menuItem.itemId){
