@@ -35,11 +35,12 @@ class AuthActivity : AppCompatActivity(){
         val prefs: SharedPreferences? = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val  email = prefs?.getString("email",null)
         val provider = prefs?.getString("provider",null)
+        val username = prefs?.getString("name",null)
 
 
-        if(email != null && provider != null){
+        if(email != null && provider != null && username !=null){
             authLayout.visibility = View.INVISIBLE
-            successRegister(email, ProviderType.valueOf(provider))
+            successGoogleRegister(email,username, ProviderType.valueOf(provider))
         }
     }
 
