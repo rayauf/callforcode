@@ -11,6 +11,7 @@ import com.example.callforcode.Adapters.BussinesAdapter
 import com.example.callforcode.Model.Bussines
 import com.example.callforcode.R
 import com.example.callforcode.Services.BussinesService
+import com.example.callforcode.Views.CardPadding
 
 class HomeFragment : Fragment() {
 
@@ -47,6 +48,7 @@ class HomeFragment : Fragment() {
         val layoutManager : RecyclerView.LayoutManager =LinearLayoutManager(context)
         layoutManager.canScrollVertically()
         recyclerView.layoutManager = layoutManager
+        recyclerView.addItemDecoration(CardPadding(0, 0, 0, 10))
     }
     interface placesDL {
         fun success(success:Boolean)

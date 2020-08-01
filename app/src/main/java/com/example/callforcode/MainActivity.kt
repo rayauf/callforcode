@@ -11,10 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.FragmentTransaction
-import com.example.callforcode.Fragments.AdminFragment
-import com.example.callforcode.Fragments.FavoriteFragment
-import com.example.callforcode.Fragments.HomeFragment
-import com.example.callforcode.Fragments.ProfileFragment
+import com.example.callforcode.Fragments.*
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.header.*
@@ -30,6 +27,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var profileFragment: ProfileFragment
     lateinit var  favoriteFragment: FavoriteFragment
     lateinit var adminFragment: AdminFragment
+    lateinit var registerFragment: RegisterFragment
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -124,10 +122,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.adm_item ->{
-                adminFragment = AdminFragment()
+                registerFragment = RegisterFragment()
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.frame_layout,adminFragment)
+                    .replace(R.id.frame_layout,registerFragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .addToBackStack("null")
                     .commit()

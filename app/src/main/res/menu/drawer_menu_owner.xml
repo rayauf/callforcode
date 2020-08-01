@@ -21,7 +21,7 @@
 
         <item
             android:id="@+id/adm_item"
-            android:title="Administrar"
+            android:title="Registrate"
             android:icon="@drawable/ic_store"/>
     </group>
 
