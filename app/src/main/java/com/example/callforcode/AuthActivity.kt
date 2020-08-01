@@ -115,6 +115,9 @@ class AuthActivity : AppCompatActivity(){
     }
 
     private  fun successRegister(email:String, provider:ProviderType){
+        val prefs: SharedPreferences.Editor? = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+        prefs?.putInt("status",1)
+        prefs?.apply()
         val mainIntent = Intent(this,MainActivity::class.java).apply {
 
             putExtra("email",email)
@@ -124,6 +127,9 @@ class AuthActivity : AppCompatActivity(){
     }
 
     private  fun successGoogleRegister(email:String, name:String, provider:ProviderType){
+        val prefs: SharedPreferences.Editor? = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+        prefs?.putInt("status",1)
+        prefs?.apply()
         val mainIntent = Intent(this,MainActivity::class.java).apply {
 
             putExtra("email",email)

@@ -20,6 +20,10 @@
             android:icon="@drawable/ic_favorite"/>
 
         <item
+            android:id="@+id/reg_item"
+            android:title="Registrate"
+            android:icon="@drawable/ic_store"/>
+        <item
             android:id="@+id/adm_item"
             android:title="Administrar"
             android:icon="@drawable/ic_store"/>

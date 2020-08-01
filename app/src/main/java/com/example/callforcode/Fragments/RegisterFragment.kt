@@ -1,5 +1,7 @@
 package com.example.callforcode.Fragments
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,9 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.fragment.app.FragmentTransaction
 import com.example.callforcode.R
 import com.example.callforcode.Services.BussinesService
+import com.google.android.gms.common.util.SharedPreferencesUtils
 import kotlinx.android.synthetic.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_register.*
 
 
@@ -39,12 +44,21 @@ class RegisterFragment : Fragment() {
 
 
         button_register_bussines.setOnClickListener {
-            Log.i("name",name?.text.toString())
-            Log.i("category",category?.text.toString())
-            Log.i("description",description?.text.toString())
+
             var bussines = BussinesService.getInstance()
-                .registerBussines(context, name?.text.toString(), category?.text.toString(), description?.text.toString(), "19.123456", "-99.123456")
-            Log.i("ID",bussines.toString())
+                .registerBussines(context, name?.text.toString(), category?.text.toString(), description?.text.toString(), "15.123", "-20.123")
+            Thread.sleep(1000)
+            lateinit var homeFragment: HomeFragment
+            homeFragment = HomeFragment()
+            this.activity?.supportFragmentManager
+                ?.beginTransaction()
+                ?.replace(R.id.frame_layout,homeFragment)
+                ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                ?.commit()
+            nav_view.setCheckedItem(R.id.home_item)
+
+
+
 
         }
     }

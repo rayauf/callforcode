@@ -2,20 +2,18 @@ package com.example.callforcode
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.FragmentTransaction
 import com.example.callforcode.Fragments.*
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.header.*
 import kotlinx.android.synthetic.main.main_nav_bar.*
+
 enum class ProviderType{
     BASIC,
     GOOGLE
@@ -30,6 +28,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var registerFragment: RegisterFragment
 
 
+
+    override fun onStart() {
+        super.onStart()
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -74,7 +77,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             .replace(R.id.frame_layout,homeFragment)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
+
+
     }
+
+
 
     private fun setHeaderData() {
         val prefToHeader: SharedPreferences? =  getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
@@ -122,6 +129,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.adm_item ->{
+                adminFragment = AdminFragment()
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.frame_layout,adminFragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .addToBackStack("null")
+                    .commit()
+            }
+            R.id.reg_item ->{
                 registerFragment = RegisterFragment()
                 supportFragmentManager
                     .beginTransaction()
